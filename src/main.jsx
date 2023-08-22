@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./app/strore.js";
 //importacion de react-query
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 //importacion de estilos
 import { ChakraProvider } from "@chakra-ui/react";
 import "./main.css";

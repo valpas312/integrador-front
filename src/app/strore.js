@@ -4,18 +4,20 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 //import de reducers
-import counterSlice from "../features/counter/counterSlice";
+import tokenSlice from "../features/token/tokenSlice";
+import userSlice from "../features/user/userSlice";
 
 //configuracion de persistencia
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["counter"]
+    whitelist: ["x-token"]
 };
 
 //combine de reducers
 const reducers = combineReducers({
-    counter: counterSlice
+    token: tokenSlice,
+    user: userSlice,
 });
 
 //creacion de store
