@@ -11,6 +11,9 @@ const tokenSlice = createSlice({
         setUser: (state, action) => {
             state.value = action.payload;
         },
+        logout: (state) => {
+            state.value = {};
+        },
     },
 });
 
