@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 //import de reducers
 import tokenSlice from "../features/token/tokenSlice";
 import userSlice from "../features/user/userSlice";
+import turnosSlice from "../features/turnos/turnosSlice";
 
 //configuracion de persistencia
 const persistConfig = {
@@ -18,6 +19,7 @@ const persistConfig = {
 const reducers = combineReducers({
     token: tokenSlice,
     user: userSlice,
+    turnos: turnosSlice,
 });
 
 //creacion de store
