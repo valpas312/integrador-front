@@ -3,6 +3,8 @@ import {
     FormControl,
     FormLabel,
     Input,
+    Divider,
+    Spinner,
   } from '@chakra-ui/react'
 
 import { useState } from 'react'
@@ -11,8 +13,10 @@ import axios from 'axios'
 import { API_URL } from '../../utils/constantes'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTurnos } from '../../features/turnos/turnosSlice'
+import { handleError } from '../../utils/handleError'
 
 const CrearTurno = () => {
+
     const dispatch = useDispatch()
     const token  = useSelector((state) => state.token.value)
     const [fechayhora, setFechayhora] = useState('')
@@ -29,7 +33,7 @@ const CrearTurno = () => {
         }
     };
 
-    const { mutate, isLoading } = useMutation({
+    const { mutate, isLoading, isError, isSuccess, error, data} = useMutation({
         mutationKey: ['turno'],
         mutationFn: () => {
             return axios.post(
@@ -70,19 +74,33 @@ const CrearTurno = () => {
     <FormControl
         as="form"
         onSubmit={handleOnSubmit}
+        maxW="lg"
+        mx="auto"
+        my="8"
+        p="8"
+        bg="white"
+        borderRadius="md"
+        boxShadow="md"
     >
         <FormLabel>Fecha y Hora</FormLabel>
-        <Input type="datetime-local"  id='fechayhora' onChange={handleOnChange}/>
+        <Input type="datetime-local"  id='fechayhora' onChange={handleOnChange} isRequired/>
 
         <FormLabel>Medico</FormLabel>
-        <Input type="text" id='medico' onChange={handleOnChange} />
+        <Input type="text" id='medico' onChange={handleOnChange} isRequired />
         
         <FormLabel>Especialidad</FormLabel>
-        <Input type="text" id='especialidad' onChange={handleOnChange} />
+        <Input type="text" id='especialidad' onChange={handleOnChange} isRequired />
 
-        <Button type='submit'>
+        <Divider my='4' />
+
+        <Button type='submit'
+            colorScheme='teal'
+            size='lg'
+            fontSize='md'
+            isLoading={isLoading}
+        >
             {
-                isLoading ? 'Cargando...' : 'Crear Turno'
+                isLoading ? <Spinner /> : isError ? handleError(error) : isSuccess ? data : 'Crear Turno'
             }
         </Button>
     </FormControl>

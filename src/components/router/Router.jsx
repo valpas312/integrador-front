@@ -5,12 +5,12 @@ import Home from "../../pages/home/Home"
 import Register from "../../pages/register/Register"
 import CrearTurno from "../../pages/turnos/CrearTurno";
 
-import Navbar from "../navbar/Navbar";
+import Layout from "../layout/Layout";
 
 const Router = () => {
   return (<>
     <BrowserRouter>
-        <Navbar />
+        <Layout />
         <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/login" element={<Login/>} />

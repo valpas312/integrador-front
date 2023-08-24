@@ -9,8 +9,10 @@ import {
   FormLabel,
   Input,
   Button,
-  Spinner
+  Spinner,
+  Divider,
 } from "@chakra-ui/react";
+import { handleError } from "../../utils/handleError";
 
 const Register = () => {
   // const dispatch = useDispatch();
@@ -32,14 +34,14 @@ const Register = () => {
     }
   };
 
-  const { mutate, isLoading} = useMutation({
+  const { mutate, isLoading, isError, error, isSuccess, data } = useMutation({
     mutationKey: ["login"],
     mutationFn: () => {
       return axios.post(`${API_URL}/users/`, {
         email,
         contraseña,
         dni,
-        nombre
+        nombre,
       });
     },
   });
@@ -62,19 +64,26 @@ const Register = () => {
   };
 
   return (
-    <FormControl as="form" onSubmit={handleOnSubmit}>
+    <FormControl
+      as="form"
+      onSubmit={handleOnSubmit}
+      maxW="lg"
+      mx="auto"
+      my="8"
+      p="8"
+      bg="white"
+      borderRadius="md"
+      boxShadow="md"
+    >
       <FormLabel>DNI</FormLabel>
-      <Input
-        placeholder="DNI"
-        id="dni"
-        onChange={handleOnChange}
-      />
+      <Input placeholder="DNI" id="dni" onChange={handleOnChange} isRequired />
 
       <FormLabel>Nombre y apellido</FormLabel>
       <Input
         placeholder="Nombre y apellido"
         id="nombre"
         onChange={handleOnChange}
+        isRequired
       />
 
       <FormLabel>Correo electrónico</FormLabel>
@@ -82,6 +91,7 @@ const Register = () => {
         placeholder="Correo electrónico"
         id="email"
         onChange={handleOnChange}
+        isRequired
       />
 
       <FormLabel>Contraseña</FormLabel>
@@ -89,13 +99,23 @@ const Register = () => {
         placeholder="Contraseña"
         id="contraseña"
         onChange={handleOnChange}
+        isRequired
       />
 
-      <Button type="submit">{
-        isLoading ? <Spinner /> : "Registrarse"
-      }</Button>
+<Divider my='4' />
+
+<Button type='submit'
+    colorScheme='teal'
+    size='lg'
+    fontSize='md'
+    isLoading={isLoading}
+>
+    {
+        isLoading ? <Spinner /> : isError ? handleError(error) : isSuccess ? data : 'Registrarse'
+    }
+</Button>
     </FormControl>
   );
-}
+};
 
-export default Register
+export default Register;

@@ -1,4 +1,14 @@
-import { FormControl, FormLabel, Input, Button, Spinner } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Spinner,
+  Divider,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { API_URL } from "../../utils/constantes";
 import { useMutation } from "@tanstack/react-query";
@@ -6,8 +16,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../features/token/tokenSlice";
 import { setUser } from "../../features/user/userSlice";
+import { handleError } from "../../utils/handleError";
 
 const Login = () => {
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -21,7 +35,7 @@ const Login = () => {
     }
   };
 
-  const { mutate, isLoading} = useMutation({
+  const { mutate, isLoading, isError, isSuccess, error } = useMutation({
     mutationKey: ["login"],
     mutationFn: () => {
       return axios.post(`${API_URL}/users/login`, {
@@ -49,24 +63,60 @@ const Login = () => {
   };
 
   return (
-    <FormControl as="form" onSubmit={handleOnSubmit}>
+    <FormControl
+      as="form"
+      onSubmit={handleOnSubmit}
+      maxW="lg"
+      mx="auto"
+      my="8"
+      p="8"
+      bg="white"
+      borderRadius="md"
+      boxShadow="md"
+    >
       <FormLabel>Correo electrónico</FormLabel>
       <Input
         placeholder="Correo electrónico"
         id="email"
         onChange={handleOnChange}
+        isRequired
       />
 
       <FormLabel>Contraseña</FormLabel>
-      <Input
-        placeholder="Contraseña"
-        id="contraseña"
-        onChange={handleOnChange}
-      />
+      <InputGroup>
+        <Input
+          placeholder="Contraseña"
+          id="contraseña"
+          onChange={handleOnChange}
+          type={show ? "text" : "password"}
+          isRequired
+        />
+        <InputRightElement width="4.5rem">
+          <Button h="1.75rem" size="sm" onClick={handleClick}>
+            {show ? <ViewIcon /> : <ViewOffIcon />}
+          </Button>
+        </InputRightElement>
+      </InputGroup>
 
-      <Button type="submit">{
-        isLoading ? <Spinner /> : "Iniciar sesión"
-      }</Button>
+      <Divider my="4" />
+
+      <Button
+        type="submit"
+        colorScheme="teal"
+        size="lg"
+        fontSize="md"
+        isLoading={isLoading}
+      >
+        {isLoading ? (
+          <Spinner />
+        ) : isError ? (
+          handleError(error)
+        ) : isSuccess ? (
+          "Iniciado sesión"
+        ) : (
+          "Iniciar sesión"
+        )}
+      </Button>
     </FormControl>
   );
 };
