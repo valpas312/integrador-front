@@ -4,11 +4,18 @@ export const handleError = (err) => {
       return "Error de conexion, intente nuevamente";
     }
 
-    const { email, contraseña } = err.response.data.err;
-
-    if (email) {
-      return email.msg;
-    } else if (contraseña) {
-      return contraseña.msg;
+    if (err.response.data.err){
+      const { email, contraseña } = err.response.data.err;
+  
+      if (email) {
+        return email.msg;
+      } else if (contraseña) {
+        return contraseña.msg;
+      }
     }
+
+    if (err.response.data.msg){
+      return err.response.data.msg;
+    }
+
   };

@@ -111,7 +111,7 @@ const Register = () => {
     isLoading={isLoading}
 >
     {
-        isLoading ? <Spinner /> : isError ? handleError(error) : isSuccess ? data : 'Registrarse'
+        isLoading ? <Spinner /> : isError ? handleError(error) : isSuccess ? data.data.message : 'Registrarse'
     }
 </Button>
     </FormControl>

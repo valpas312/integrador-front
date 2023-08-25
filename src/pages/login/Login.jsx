@@ -35,7 +35,7 @@ const Login = () => {
     }
   };
 
-  const { mutate, isLoading, isError, isSuccess, error } = useMutation({
+  const { mutate, isLoading, isError, isSuccess, error, data } = useMutation({
     mutationKey: ["login"],
     mutationFn: () => {
       return axios.post(`${API_URL}/users/login`, {
@@ -112,7 +112,7 @@ const Login = () => {
         ) : isError ? (
           handleError(error)
         ) : isSuccess ? (
-          "Iniciado sesión"
+          data ? data.data.message : "Sesion iniciada"
         ) : (
           "Iniciar sesión"
         )}
