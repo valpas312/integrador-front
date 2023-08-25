@@ -7,6 +7,7 @@ import {
   Divider,
   InputGroup,
   InputRightElement,
+  Center,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -17,8 +18,11 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../features/token/tokenSlice";
 import { setUser } from "../../features/user/userSlice";
 import { handleError } from "../../utils/handleError";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -54,6 +58,7 @@ const Login = () => {
           console.log(data.data);
           dispatch(setToken(data.data.token));
           dispatch(setUser(data.data.usuario));
+          navigate("/");
         },
         onError: (error) => {
           console.log(error);
@@ -100,23 +105,42 @@ const Login = () => {
 
       <Divider my="4" />
 
-      <Button
-        type="submit"
-        colorScheme="teal"
-        size="lg"
-        fontSize="md"
-        isLoading={isLoading}
-      >
-        {isLoading ? (
-          <Spinner />
-        ) : isError ? (
-          handleError(error)
-        ) : isSuccess ? (
-          data ? data.data.message : "Sesion iniciada"
-        ) : (
-          "Iniciar sesión"
-        )}
-      </Button>
+      <Center h="50px" display="flex" gap="20px">
+        <Button
+          type="submit"
+          colorScheme="teal"
+          size="lg"
+          fontSize="md"
+          isLoading={isLoading}
+        >
+          {isLoading ? (
+            <Spinner />
+          ) : isError ? (
+            handleError(error)
+          ) : isSuccess ? (
+            data ? (
+              data.data.message
+            ) : (
+              "Sesion iniciada"
+            )
+          ) : (
+            "Iniciar sesión"
+          )}
+        </Button>
+
+        <Center h="50px">
+          <Divider orientation="vertical" my="4" />
+        </Center>
+
+        <Button
+          colorScheme="blue"
+          size="lg"
+          fontSize="md"
+          onClick={() => navigate("/register")}
+        >
+          Registrarse
+        </Button>
+      </Center>
     </FormControl>
   );
 };

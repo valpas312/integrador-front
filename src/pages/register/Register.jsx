@@ -11,11 +11,14 @@ import {
   Button,
   Spinner,
   Divider,
+  Center,
 } from "@chakra-ui/react";
 import { handleError } from "../../utils/handleError";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   // const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
@@ -55,6 +58,7 @@ const Register = () => {
           console.log(data.data);
           // dispatch(setToken(data.data.token));
           // dispatch(setUser(data.data.usuario));
+          navigate("/login");
         },
         onError: (error) => {
           console.log(error);
@@ -102,18 +106,39 @@ const Register = () => {
         isRequired
       />
 
-<Divider my='4' />
+      <Divider my="4" />
 
-<Button type='submit'
-    colorScheme='teal'
-    size='lg'
-    fontSize='md'
-    isLoading={isLoading}
->
-    {
-        isLoading ? <Spinner /> : isError ? handleError(error) : isSuccess ? data.data.message : 'Registrarse'
-    }
-</Button>
+      <Center display="flex" gap="20px">
+        <Button
+          type="submit"
+          colorScheme="teal"
+          size="lg"
+          fontSize="md"
+          isLoading={isLoading}
+        >
+          {isLoading ? (
+            <Spinner />
+          ) : isError ? (
+            handleError(error)
+          ) : isSuccess ? (
+            data.data.message
+          ) : (
+            "Registrarse"
+          )}
+        </Button>
+        <Center h="50px">
+          <Divider orientation="vertical" my="4" />
+        </Center>
+
+        <Button
+          colorScheme="blue"
+          size="lg"
+          fontSize="md"
+          onClick={() => navigate("/login")}
+        >
+          Iniciar sesión
+        </Button>
+      </Center>
     </FormControl>
   );
 };

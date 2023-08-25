@@ -1,4 +1,5 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { useElement } from "../../utils/useElement";
 
 import Login from "../../pages/login/Login"
 import Home from "../../pages/home/Home"
@@ -11,14 +12,15 @@ import Layout from "../layout/Layout";
 const Router = () => {
   return (<>
     <BrowserRouter>
-        <Layout />
+        <Layout>
         <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={useElement(<Home/>, <Login/>)} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
-            <Route path="/turnos/crear" element={<CrearTurno/>} />
-            <Route path="/turnos" element={<Turnos/>} />
+            <Route path="/turnos/crear" element={useElement(<CrearTurno/>, <Login/>)} />
+            <Route path="/turnos" element={useElement(<Turnos/>, <Login/>)} />
         </Routes>
+        </Layout>
     </BrowserRouter>
   </>
   )

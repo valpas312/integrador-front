@@ -12,7 +12,7 @@ import turnosSlice from "../features/turnos/turnosSlice";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["x-token"]
+    whitelist: ["x-token", "user"]
 };
 
 //combine de reducers
