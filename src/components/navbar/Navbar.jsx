@@ -47,14 +47,6 @@ const Navbar = () => {
             </MenuButton>
             <MenuList color="black" boxShadow="lg">
               <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
-              <MenuItem>
-                <Link as="button" w="100%" to="/turnos">
-                  Turnos
-                </Link>
-              </MenuItem>
-              <MenuItem>
-                <Link to="/turnos/crear">Sacar Turno</Link>
-              </MenuItem>
               {!user.verified && (
                 <MenuItem>
                   <Link as="button" w="100%" to="/verify">
