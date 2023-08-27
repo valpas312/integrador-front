@@ -19,6 +19,7 @@ const Router = () => {
             <Route path="/register" element={<Register/>} />
             <Route path="/turnos/crear" element={useElement(<CrearTurno/>, <Login/>)} />
             <Route path="/turnos" element={useElement(<Turnos/>, <Login/>)} />
+            <Route path="*" element={<h1>404</h1>} />
         </Routes>
         </Layout>
     </BrowserRouter>

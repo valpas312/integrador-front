@@ -1,7 +1,8 @@
-import { Box, Button } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import SideNavLink from "../../utils/SideNavLink"
+import { Box } from "@chakra-ui/layout"
 
 const SideNav = () => {
+
   return (<Box
     display="flex"
     flexDirection="column"
@@ -10,11 +11,7 @@ const SideNav = () => {
     gap={5}
     mt={5}
   >
-    <Button as={Link} w="100%" bg={"transparent"} borderRadius={0} to="/turnos/historial">Historial de turnos</Button>
-    <Button as={Link} w="100%" bg={"transparent"} borderRadius={0} to="/turnos/turnosPendientes">Turnos pendientes</Button>
-    <Button as={Link} w="100%" bg={"transparent"} borderRadius={0} to="/turnos/turnosConfirmados">Turnos confirmados</Button>
-    <Button as={Link} w="100%" bg={"transparent"} borderRadius={0} to="/turnos/turnosCancelados">Turnos cancelados</Button>
-    <Button as={Link} w="100%" bg={"transparent"} borderRadius={0} to="/turnos/crear">Sacar Turno</Button>
+    <SideNavLink text="Turnos" to="/turnos" />
   </Box>)
 }
 

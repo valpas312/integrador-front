@@ -19,6 +19,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.value);
+  const token = useSelector((state) => state.token.value);
 
   return (
     <Box
@@ -31,7 +32,7 @@ const Navbar = () => {
       position="sticky"
       top="0"
     >
-      {user?.dni ? (
+      {user?.dni && token ? (
         <Box display="flex" alignItems="center" maxW="100vw" gap={5}>
           <Container display="flex" maxW="100%">
             <Image
@@ -42,7 +43,7 @@ const Navbar = () => {
           </Container>
           <Link to="/">Home</Link>
           <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} bg={"transparent"} _hover={{ bg: "#e25f61" }} rightIcon={<ChevronDownIcon />}>
               <Avatar bg="teal.500" size="xs" />
             </MenuButton>
             <MenuList color="black" boxShadow="lg">

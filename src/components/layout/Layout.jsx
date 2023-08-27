@@ -12,6 +12,7 @@ import SideNav from "../navbar/SideNav";
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
   const user = useSelector((state) => state.user.value);
+  const token = useSelector((state) => state.token.value);
 
   const { isOpen, onToggle } = useDisclosure();
 
@@ -24,7 +25,7 @@ const Layout = ({ children }) => {
         gridTemplateColumns={isOpen ? "200px 1fr" : "50px 1fr"}
         h="100vh"
       >
-        {user.dni && (
+        {user?.dni && token && (
           <GridItem bg="#FF686B" area={"nav"}>
             <Button w="100%" borderRadius={0} bg="white" onClick={onToggle}>
               {isOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}

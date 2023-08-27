@@ -1,7 +1,15 @@
+import { useSelector } from "react-redux"
 
 const Turnos = () => {
-  return (
-    <div>Turnos</div>
+
+  const turnos = useSelector(state => state.turnos.turnos)
+
+  console.log(turnos)
+
+  return (<>
+    <h1>Turnos</h1>
+    
+  </>
   )
 }
 

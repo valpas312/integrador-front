@@ -60,7 +60,7 @@ const CrearTurno = () => {
       {},
       {
         onSuccess: (data) => {
-          console.log(data.data), dispatch(setTurnos(data.data));
+          console.log(data.data), dispatch(setTurnos(data.data.data));
         },
         onError: (error) => {
           console.log(error);
