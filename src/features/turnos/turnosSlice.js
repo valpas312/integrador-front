@@ -5,7 +5,7 @@ const initialState = {
     historialDeTurnos: [],
     turnosPendientesAConfirmar: [],
     turnosConfirmados: [],
-    turnosCancelados: [],
+    turnosCancelados: []
 }
 const turnosSlice = createSlice({
     name: "turnos",
@@ -17,7 +17,7 @@ const turnosSlice = createSlice({
             state.turnosPendientesAConfirmar = action.payload.filter((turno) => turno.estado === "Pendiente a confirmar");
             state.turnosConfirmados = action.payload.filter((turno) => turno.estado === "Confirmado");
             state.turnosCancelados = action.payload.filter((turno) => turno.estado === "Cancelado");
-        }
+        },
     },
 });
 
