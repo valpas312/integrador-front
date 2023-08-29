@@ -7,9 +7,8 @@ const TurnosButton = ({children, onClick}) => {
     color="white"
     _hover={{ bg: "#e25f61" }}
     _active={{ bg: "#e25f61" }}
-    _focus={{ boxShadow: "none" }}
     w="100%"
-    borderRadius={0}
+    borderRadius={2}
     onClick={onClick}
   >
     {children}
