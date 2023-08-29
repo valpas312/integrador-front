@@ -14,9 +14,12 @@ const tokenSlice = createSlice({
         logout: (state) => {
             state.value = {};
         },
+        setVerified: (state) => {
+            state.value.verified = true;
+        },
     },
 });
 
-export const { setUser, logout} = tokenSlice.actions;
+export const { setUser, logout, setVerified} = tokenSlice.actions;
 
 export default tokenSlice.reducer;

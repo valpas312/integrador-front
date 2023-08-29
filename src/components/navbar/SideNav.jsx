@@ -12,6 +12,7 @@ const SideNav = () => {
     mt={5}
   >
     <SideNavLink text="Turnos" to="/turnos" />
+    <SideNavLink text="Sacar turno" to="/turnos/crear" />
   </Box>)
 }
 

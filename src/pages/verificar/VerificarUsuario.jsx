@@ -1,7 +1,3 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { API_URL } from "../../utils/constantes";
-import axios from "axios";
 import {
   FormControl,
   FormLabel,
@@ -10,39 +6,36 @@ import {
   Spinner,
   Divider,
   Center,
+  HStack,
+  PinInput,
+  PinInputField,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { API_URL } from "../../utils/constantes";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
-import RegisterToast from "./RegisterToast";
+import { useDispatch } from "react-redux";
+import { setVerified } from "../../features/user/userSlice";
 
-const Register = () => {
+const VerificarUsuario = () => {
   const navigate = useNavigate();
+    const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const [contraseña, setContraseña] = useState("");
-  const [dni, setDni] = useState("");
-  const [nombre, setNombre] = useState("");
+  const [code, setCode] = useState("");
 
   const handleOnChange = (e) => {
-    if (e.target.id === "email") {
-      setEmail(e.target.value);
-    } else if (e.target.id === "contraseña") {
-      setContraseña(e.target.value);
-    } else if (e.target.id === "dni") {
-      setDni(e.target.value);
-    } else if (e.target.id === "nombre") {
-      setNombre(e.target.value);
-    }
+    setEmail(e.target.value);
   };
 
-  const { mutate, isLoading, isError, error, isSuccess, data } = useMutation({
-    mutationKey: ["login"],
+  const { mutate, isLoading, isError, isSuccess, error, data } = useMutation({
+    mutationKey: ["verify"],
     mutationFn: () => {
-      return axios.post(`${API_URL}/users/`, {
+      return axios.post(`${API_URL}/users/verify`, {
         email,
-        contraseña,
-        dni,
-        nombre,
+        code
       });
     },
   });
@@ -54,8 +47,8 @@ const Register = () => {
       {
         onSuccess: (data) => {
           console.log(data.data);
-          navigate("/login");
-          return <RegisterToast />;
+          navigate("/");
+          dispatch(setVerified());
         },
         onError: (error) => {
           console.log(error);
@@ -63,7 +56,6 @@ const Register = () => {
       }
     );
   };
-
   return (
     <FormControl
       as="form"
@@ -76,17 +68,6 @@ const Register = () => {
       borderRadius="md"
       boxShadow="md"
     >
-      <FormLabel>DNI</FormLabel>
-      <Input placeholder="DNI" id="dni" onChange={handleOnChange} isRequired />
-
-      <FormLabel>Nombre y apellido</FormLabel>
-      <Input
-        placeholder="Nombre y apellido"
-        id="nombre"
-        onChange={handleOnChange}
-        isRequired
-      />
-
       <FormLabel>Correo electrónico</FormLabel>
       <Input
         placeholder="Correo electrónico"
@@ -95,17 +76,21 @@ const Register = () => {
         isRequired
       />
 
-      <FormLabel>Contraseña</FormLabel>
-      <Input
-        placeholder="Contraseña"
-        id="contraseña"
-        onChange={handleOnChange}
-        isRequired
-      />
+      <FormLabel>Codigo</FormLabel>
+      <HStack>
+        <PinInput type="alphanumeric" mask id="code" onChange={(e) => setCode(e)} isRequired >
+          <PinInputField  />
+          <PinInputField />
+          <PinInputField />
+          <PinInputField />
+          <PinInputField />
+          <PinInputField />
+        </PinInput>
+      </HStack>
 
       <Divider my="4" />
 
-      <Center display="flex" gap="20px">
+      <Center h="50px" display="flex" gap="20px">
         <Button
           type="submit"
           colorScheme="teal"
@@ -118,11 +103,16 @@ const Register = () => {
           ) : isError ? (
             handleError(error)
           ) : isSuccess ? (
-            data.data.message
+            data ? (
+              data.data.message
+            ) : (
+              "Usuario verificado"
+            )
           ) : (
-            "Registrarse"
+            "Verificar usuario"
           )}
         </Button>
+
         <Center h="50px">
           <Divider orientation="vertical" my="4" />
         </Center>
@@ -133,11 +123,11 @@ const Register = () => {
           fontSize="md"
           onClick={() => navigate("/login")}
         >
-          Iniciar sesión
+          Registrarse
         </Button>
       </Center>
     </FormControl>
   );
 };
 
-export default Register;
+export default VerificarUsuario;

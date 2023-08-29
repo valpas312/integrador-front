@@ -50,7 +50,7 @@ const Navbar = () => {
               <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
               {!user.verified && (
                 <MenuItem>
-                  <Link as="button" w="100%" to="/verify">
+                  <Link as="button" w="100%" to="/verificar">
                     Verificar usuario
                   </Link>
                 </MenuItem>
