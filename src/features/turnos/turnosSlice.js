@@ -13,10 +13,10 @@ const turnosSlice = createSlice({
     reducers: {
         setTurnos(state, action) {
             state.turnos = action.payload;
-            state.historialDeTurnos = action.payload.filter((turno) => turno.fechayhora < Date.now());
+            state.historialDeTurnos = action.payload.filter((turno) => turno.fechayhora < new Date().toISOString() && turno.estado == "Confirmado");
             state.turnosPendientesAConfirmar = action.payload.filter((turno) => turno.estado === "Pendiente a confirmar");
             state.turnosConfirmados = action.payload.filter((turno) => turno.estado === "Confirmado");
-            state.turnosCancelados = action.payload.filter((turno) => turno.estado === "Cancelado");
+            state.turnosCancelados = action.payload.filter((turno) => turno.estado === "Cancelado" || turno.fechayhora < new Date().toISOString() && turno.estado == "Pendiente a confirmar" );
         },
     },
 });

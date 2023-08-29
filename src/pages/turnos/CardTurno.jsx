@@ -1,21 +1,37 @@
 import { Card, CardHeader, CardBody, CardFooter, Text, Divider } from '@chakra-ui/react'
+import TurnosModal from './TurnosModal'
+import InfoModal from './InfoModal'
+
 
 // eslint-disable-next-line no-unused-vars
 const CardTurno = ({...props}) => {
 
     // eslint-disable-next-line react/prop-types
-    const { especialidad, fechayhora, medico, estado, key } = props
+    const { especialidad, fechayhora, medico, estado, key, accion, descripcion } = props
 
   return (
     <Card key={key} w="20vw">
-        <CardHeader>{especialidad}</CardHeader>
+        <CardHeader display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        bg="gray.200"
+
+        >
+        {especialidad}
+        <InfoModal />
+        </CardHeader>
         <CardBody>
             <Text>{medico}</Text>
             <Text>{fechayhora}</Text>
         </CardBody>
         <Divider />
-        <CardFooter>
-            <Text>{estado}</Text>
+        <CardFooter
+            bg="#FF686B"
+        >
+            <Text
+                fontWeight="bold"
+            >{estado}</Text>
+            <TurnosModal fechayhora={fechayhora} accion={accion} descripcion={descripcion} />
         </CardFooter>
     </Card>
   )

@@ -12,12 +12,12 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { API_URL, medicos, especialidades } from "../../utils/constantes";
-import { useDispatch, useSelector } from "react-redux";
-import { setTurnos } from "../../features/turnos/turnosSlice";
+import { useSelector } from "react-redux";
 import { handleError } from "../../utils/handleError";
+import { useNavigate } from "react-router-dom";
 
 const CrearTurno = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const token = useSelector((state) => state.token.value);
   const [fechayhora, setFechayhora] = useState("");
   const [medico, setMedico] = useState("");
@@ -60,7 +60,8 @@ const CrearTurno = () => {
       {},
       {
         onSuccess: (data) => {
-          console.log(data.data), dispatch(setTurnos(data.data.data));
+          console.log(data.data)
+          navigate("/");
         },
         onError: (error) => {
           console.log(error);

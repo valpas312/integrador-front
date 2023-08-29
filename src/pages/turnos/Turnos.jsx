@@ -24,19 +24,28 @@ const Turnos = () => {
 
   const handleTurnosAMostrar = (turnos) => {
     setTurnosAMostrar(turnos);
-    console.log(Object.keys(turnosAMostrar).length);
   };
 
   return (
     <>
-      <ButtonGroup w="100%" p={4}>
+      <ButtonGroup
+        w="100%"
+        p={4}
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+        gap={4}
+      >
         <TurnosButton onClick={() => handleTurnosAMostrar(turnos)}>
           Todos los turnos
         </TurnosButton>
         <TurnosButton onClick={() => handleTurnosAMostrar(historialDeTurnos)}>
           Historial de turnos
         </TurnosButton>
-        <TurnosButton onClick={() => handleTurnosAMostrar(turnosPendientesAConfirmar)}>
+        <TurnosButton
+          onClick={() => handleTurnosAMostrar(turnosPendientesAConfirmar)}
+        >
           Turnos pendientes a confirmar
         </TurnosButton>
         <TurnosButton onClick={() => handleTurnosAMostrar(turnosConfirmados)}>
@@ -67,6 +76,8 @@ const Turnos = () => {
                 especialidad={especialidad}
                 fechayhora={dateFormatter(fechayhora)}
                 medico={medico}
+                accion="Confirmar turno"
+                descripcion="¿Está seguro que desea confirmar el turno?"
               />
             );
           })

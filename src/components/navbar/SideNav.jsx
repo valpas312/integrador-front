@@ -1,7 +1,11 @@
 import SideNavLink from "../../utils/SideNavLink"
 import { Box } from "@chakra-ui/layout"
+import { useSelector } from "react-redux"
+import { Spinner } from "@chakra-ui/react"
 
 const SideNav = () => {
+
+  const turnos = useSelector(state => state.turnos.turnos)
 
   return (<Box
     display="flex"
@@ -11,7 +15,9 @@ const SideNav = () => {
     gap={5}
     mt={5}
   >
-    <SideNavLink text="Turnos" to="/turnos" />
+    {
+      turnos.length === 0 ? <Spinner /> : <SideNavLink text="Mis turnos" to="/turnos" />
+    }
     <SideNavLink text="Sacar turno" to="/turnos/crear" />
   </Box>)
 }
