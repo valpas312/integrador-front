@@ -4,9 +4,13 @@ import { API_URL } from "../../utils/constantes"
 import axios from "axios"
 import { setTurnos } from "../../features/turnos/turnosSlice"
 import { useEffect } from "react"
+import { Box, Divider, Text } from "@chakra-ui/react"
+import CredencialDigital from "./CredencialDigital"
+import CardsHome from "./CardsHome"
 
 const Home = () => {
   const token = useSelector(state => state.token.value)
+  const user = useSelector(state => state.user.value)
 
   const dispatch = useDispatch()
 
@@ -35,9 +39,40 @@ const Home = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return (<>
-    <h1>Home</h1>
-  </>)
+  return (<Box
+    display="flex"
+    flexDirection="column"
+    alignItems="center"
+    justifyContent="center"
+    gap={5}
+    flexWrap="wrap"
+  >
+    <Text
+      fontSize="2xl"
+      color="gray.600"
+      fontWeight="bold"
+      m={4}
+    >Integrante:{user.nombre}</Text>
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      gap={2}
+      w="90%"
+      boxShadow="base"
+      rounded="md"
+      bg="#FFFFFF"
+      p={2}
+    >
+      Credencial Digital
+      <Divider />
+      <CredencialDigital nombre={user.nombre} dni={user.dni} />
+      <CardsHome>
+        <Text>Cartilla: Global</Text>
+      </CardsHome>
+    </Box>
+  </Box>)
 }
 
 export default Home

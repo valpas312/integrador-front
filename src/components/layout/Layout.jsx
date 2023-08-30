@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
               <SideNav />}
           </GridItem>
         )}
-        <GridItem area={"main"}>{children}</GridItem>
+        <GridItem area={"main"} bg="#F6F6F6" >{children}</GridItem>
       </Grid>
     </>
   );
