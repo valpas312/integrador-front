@@ -1,3 +1,4 @@
+// Objetivo: formatear fechas
 export const dateFormatter = (date) => {
     const fecha = new Date(date);
     const dia = fecha.getDate();

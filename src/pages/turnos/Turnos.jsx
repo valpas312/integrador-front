@@ -61,10 +61,12 @@ const Turnos = () => {
         flexWrap="wrap"
         justifyContent="center"
         alignItems="center"
-        gap={4}
+        gap={10}
         padding="2rem"
       >
-        {Object.keys(turnosAMostrar).length === 0 ? (
+        {
+          turnosAMostrar == null | undefined ? <h1>No hay turnos para esta seleccion</h1> :
+          Object.keys(turnosAMostrar).length === 0 ? (
           <h1>No hay turnos para esta seleccion</h1>
         ) : (
           turnosAMostrar.map((turno) => {
@@ -78,6 +80,7 @@ const Turnos = () => {
                 medico={medico}
                 accion="Confirmar turno"
                 descripcion="¿Está seguro que desea confirmar el turno?"
+                _id={_id}
               />
             );
           })

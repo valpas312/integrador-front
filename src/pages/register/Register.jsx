@@ -13,16 +13,18 @@ import {
 } from "@chakra-ui/react";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
-import RegisterToast from "./RegisterToast";
+import RegisterToast from "./RegisterToast"
 
 const Register = () => {
   const navigate = useNavigate();
 
+  //estados para el formulario
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [dni, setDni] = useState("");
   const [nombre, setNombre] = useState("");
 
+  //funcion para manejar los cambios en el formulario
   const handleOnChange = (e) => {
     if (e.target.id === "email") {
       setEmail(e.target.value);
@@ -35,6 +37,7 @@ const Register = () => {
     }
   };
 
+  //peticion para registrar un usuario
   const { mutate, isLoading, isError, error, isSuccess, data } = useMutation({
     mutationKey: ["login"],
     mutationFn: () => {
@@ -47,6 +50,7 @@ const Register = () => {
     },
   });
 
+  //funcion para manejar el submit del formulario
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     mutate(
@@ -55,7 +59,6 @@ const Register = () => {
         onSuccess: (data) => {
           console.log(data.data);
           navigate("/login");
-          return <RegisterToast />;
         },
         onError: (error) => {
           console.log(error);
@@ -136,6 +139,9 @@ const Register = () => {
           Iniciar sesión
         </Button>
       </Center>
+      {
+        isSuccess && <RegisterToast />
+      }
     </FormControl>
   );
 };

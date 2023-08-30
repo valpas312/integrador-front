@@ -18,11 +18,16 @@ import { useNavigate } from "react-router-dom";
 
 const CrearTurno = () => {
   const navigate = useNavigate();
+
+  //token del usuario
   const token = useSelector((state) => state.token.value);
+
+  //estados para el formulario
   const [fechayhora, setFechayhora] = useState("");
   const [medico, setMedico] = useState("");
   const [especialidad, setEspecialidad] = useState("");
 
+  //funcion para manejar los cambios en el formulario
   const handleOnChange = (e) => {
     if (e.target.id === "fechayhora") {
       setFechayhora(e.target.value);
@@ -33,6 +38,7 @@ const CrearTurno = () => {
     }
   };
 
+  //peticion para crear un turno
   const { mutate, isLoading, isError, isSuccess, error, data } = useMutation({
     mutationKey: ["turno"],
     mutationFn: () => {
@@ -54,6 +60,7 @@ const CrearTurno = () => {
     },
   });
 
+  //funcion para manejar el submit del formulario
   const handleOnSubmit = (e) => {
     e.preventDefault();
     mutate(

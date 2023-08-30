@@ -10,6 +10,7 @@ const Home = () => {
 
   const dispatch = useDispatch()
 
+  //Peticion de los turnos al iniciar la pagina para despues manejarla con redux
   const { mutate } = useMutation({
     mutationKey: ["turnos"],
     mutationFn: () => {

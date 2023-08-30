@@ -1,3 +1,4 @@
+// Objetivo: manejar los errores de la API
 export const handleError = (err) => {
 
     if (err.message == "Network Error") {

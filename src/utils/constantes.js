@@ -1,3 +1,4 @@
+//Constantes globales de la aplicación
 export const API_URL = "https://integrador-back-eta.vercel.app/api"
 
 export const medicos = [

@@ -1,7 +1,7 @@
-import SideNavLink from "../../utils/SideNavLink"
 import { Box } from "@chakra-ui/layout"
 import { useSelector } from "react-redux"
 import { Spinner } from "@chakra-ui/react"
+import SideNavLink from "./SideNavLink"
 
 const SideNav = () => {
 

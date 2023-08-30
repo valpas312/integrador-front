@@ -1,3 +1,4 @@
+//custom hook para mostrar un componente u otro dependiendo de si el usuario está logueado o no
 import { useSelector } from "react-redux";
 
 export const useElement = (componente, login) => {
