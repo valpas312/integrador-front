@@ -10,13 +10,14 @@ import {
   Spinner,
   Divider,
   Center,
+  useToast,
 } from "@chakra-ui/react";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
-import RegisterToast from "./RegisterToast"
 
 const Register = () => {
   const navigate = useNavigate();
+  const toast = useToast();
 
   //estados para el formulario
   const [email, setEmail] = useState("");
@@ -59,6 +60,14 @@ const Register = () => {
         onSuccess: (data) => {
           console.log(data.data);
           navigate("/login");
+          toast({
+            title: "Usuario Registrado.",
+            description:
+              "Se ha enviado un codigo al email proporcionado para que verifique su usuario desde las opciones de usuario una vez que incie sesion.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          });
         },
         onError: (error) => {
           console.log(error);
@@ -139,9 +148,6 @@ const Register = () => {
           Iniciar sesión
         </Button>
       </Center>
-      {
-        isSuccess && <RegisterToast />
-      }
     </FormControl>
   );
 };
