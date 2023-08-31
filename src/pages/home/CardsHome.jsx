@@ -7,10 +7,13 @@ const CardsHome = ({children}) => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      w="30%"
+      flexDirection="column"
+      gap={2}
+      w="45%"
       boxShadow="base"
-      h="30%"
       rounded="md"
+      bg="#FFFFFF"
+      p={2}
     >
       {children}
     </Box>
