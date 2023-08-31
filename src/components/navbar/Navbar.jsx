@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { logout } from "../../features/user/userSlice";
+import { logoutT } from "../../features/turnos/turnosSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -43,11 +44,22 @@ const Navbar = () => {
           </Container>
           <Link to="/">Home</Link>
           <Menu>
-            <MenuButton as={Button} bg={"transparent"} _hover={{ bg: "#e25f61" }} rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+              as={Button}
+              bg={"transparent"}
+              _hover={{ bg: "#e25f61" }}
+              rightIcon={<ChevronDownIcon />}
+            >
               <Avatar bg="teal.500" size="xs" />
             </MenuButton>
             <MenuList color="black" boxShadow="lg">
-              <MenuItem onClick={() => dispatch(logout())}>Logout</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  dispatch(logout()), dispatch(logoutT());
+                }}
+              >
+                Logout
+              </MenuItem>
               {!user.verified && (
                 <MenuItem>
                   <Link as="button" w="100%" to="/verificar">
@@ -59,7 +71,7 @@ const Navbar = () => {
           </Menu>
         </Box>
       ) : (
-        <Box display="flex" gap={4} >
+        <Box display="flex" gap={4}>
           <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
         </Box>
