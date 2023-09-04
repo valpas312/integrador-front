@@ -10,16 +10,18 @@ import {
   Button,
   Spinner,
 } from "@chakra-ui/react";
-import { dateFormatter } from "../../utils/dateFormatter";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { API_URL } from "../../utils/constantes";
 import { handleError } from "../../utils/handleError";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { isDisabled } from "../../utils/handleIsDisabled";
+import { eliminarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token.value);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,6 +45,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
         onSuccess: () => {
           onClose();
           navigate("/");
+          dispatch(eliminarTurno(_id));
         },
         onError: (error) => {
           console.log(error);
@@ -53,7 +56,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
   return (
     <>
       <Button
-        isDisabled={fechayhora < dateFormatter(new Date()) || estado === "Confirmado" || estado === "Cancelado" }
+        isDisabled={isDisabled(fechayhora, estado)}
         onClick={onOpen}
       >
         {accion}

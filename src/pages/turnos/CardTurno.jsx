@@ -24,7 +24,7 @@ const CardTurno = ({ ...props }) => {
         alignItems="center"
       >
         {especialidad}
-        <InfoModal />
+          <InfoModal _id={_id} />
       </CardHeader>
       <CardBody>
         <Text>{medico}</Text>

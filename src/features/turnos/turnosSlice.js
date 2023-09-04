@@ -15,7 +15,7 @@ const turnosSlice = createSlice({
       state.turnos = action.payload;
       state.historialDeTurnos = action.payload.filter(
         (turno) =>
-          turno.fechayhora < new Date().toISOString() &&
+          turno.fechayhora < new Date().toISOString() ||
           turno.estado == "Confirmado"
       );
       state.turnosPendientesAConfirmar = action.payload.filter(
@@ -28,7 +28,7 @@ const turnosSlice = createSlice({
         (turno) =>
           turno.estado === "Cancelado" ||
           (turno.fechayhora < new Date().toISOString() &&
-            turno.estado == "Confirmado")
+            turno.estado == "Confirmado" || turno.estado == "Pendiente a confirmar" )
       );
       state.turnosCancelados = state.turnosCancelados.map((turno) => {
         turno.estado = "Cancelado";
@@ -47,10 +47,18 @@ const turnosSlice = createSlice({
       state.turnosPendientesAConfirmar = [];
       state.turnosConfirmados = [];
       state.turnosCancelados = [];
+    },
+    eliminarTurno(state, action) {
+      const turnoAEliminar = state.turnos.find(
+        (turno) => turno._id === action.payload
+      );
+      state.turnos = state.turnos.filter(
+        (turno) => turno._id !== turnoAEliminar._id
+      );
     }
   },
 });
 
-export const { setTurnos, confirmarTurno, logoutT } = turnosSlice.actions;
+export const { setTurnos, confirmarTurno, logoutT, eliminarTurno } = turnosSlice.actions;
 
 export default turnosSlice.reducer;
