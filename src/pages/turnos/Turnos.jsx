@@ -6,7 +6,7 @@ import CardTurno from "./CardTurno";
 import { dateFormatter } from "../../utils/dateFormatter";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
-import { setTurnos } from "../../features/turnos/turnosSlice";
+import { setTurnos} from "../../features/turnos/turnosSlice";
 import { useEffect } from "react";
 import { API_URL } from "../../utils/constantes";
 import axios from "axios";
@@ -17,7 +17,7 @@ const Turnos = () => {
   const dispatch = useDispatch();
 
   //Peticion de los turnos al iniciar la pagina para despues manejarla con redux
-  const { mutate, isLoading, error, isSuccess } = useMutation({
+  const { mutate, isLoading, error, isError } = useMutation({
     mutationKey: ["turnos"],
     mutationFn: () => {
       axios
@@ -27,8 +27,8 @@ const Turnos = () => {
           },
         })
         .then((res) => {
-          dispatch(setTurnos(res.data.data));
           console.log(res.data.data);
+          dispatch(setTurnos(res.data.data));
         })
         .catch((err) => {
           console.log(err);
@@ -38,7 +38,9 @@ const Turnos = () => {
     useEffect(() => {
       mutate();
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [
+      mutate,
+    ]);
     
   const turnos = useSelector((state) => state.turnos.turnos);
 
@@ -67,10 +69,10 @@ const Turnos = () => {
     <>
       {isLoading ? (
         <Spinner />
-      ) : error ? (
-        <h1>Hubo un error</h1>
+      ) : isError ? (
+        console.log(error)
       ) : (
-        isSuccess && (
+        !isError ? (
           <>
             <ButtonGroup
               w="100%"
@@ -114,7 +116,8 @@ const Turnos = () => {
               gap={10}
               padding="2rem"
             >
-              {(turnosAMostrar == null) | undefined ? (
+              {
+                (turnosAMostrar == null) | undefined ? (
                 <h1>No hay turnos para esta seleccion</h1>
               ) : Object.keys(turnosAMostrar).length === 0 ? (
                 <h1>No hay turnos para esta seleccion</h1>
@@ -139,6 +142,7 @@ const Turnos = () => {
             </Box>
           </>
         )
+        : <p>{error}</p>
       )}
     </>
   );

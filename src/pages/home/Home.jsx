@@ -5,7 +5,6 @@ import { useSelector } from "react-redux"
 
 const Home = () => {
   const user = useSelector(state => state.user.value)
-
   return (<Box
     display="flex"
     flexDirection="column"

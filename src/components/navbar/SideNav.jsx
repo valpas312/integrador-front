@@ -9,6 +9,8 @@ const SideNav = () => {
     justifyContent="center"
     gap={5}
     mt={5}
+    position="sticky"
+    top="10vh"
   >
     <SideNavLink text="Mis turnos" to="/turnos" />
     <SideNavLink text="Sacar turno" to="/turnos/crear" />

@@ -47,7 +47,7 @@ const turnosSlice = createSlice({
       state.turnosPendientesAConfirmar = [];
       state.turnosConfirmados = [];
       state.turnosCancelados = [];
-    },
+    }
   },
 });
 

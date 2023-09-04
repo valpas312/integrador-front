@@ -53,7 +53,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
   return (
     <>
       <Button
-        isDisabled={fechayhora < dateFormatter(new Date()) || estado === "Confirmado" }
+        isDisabled={fechayhora < dateFormatter(new Date()) || estado === "Confirmado" || estado === "Cancelado" }
         onClick={onOpen}
       >
         {accion}
