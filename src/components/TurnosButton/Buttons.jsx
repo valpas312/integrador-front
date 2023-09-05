@@ -67,7 +67,7 @@ const Buttons = () => {
         gap={10}
         padding="2rem"
       >
-        {turnosAMostrar == null | undefined ? (
+        {(turnosAMostrar == null) | undefined ? (
           <h1>No hay turnos para esta seleccion</h1>
         ) : Object.keys(turnosAMostrar).length === 0 ? (
           <h1>No hay turnos para esta seleccion</h1>

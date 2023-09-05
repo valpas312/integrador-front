@@ -36,6 +36,9 @@ const Home = () => {
     mutate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const turnosPendientesAConfirmar = useSelector((state) => state.turnos.value);
+
   return (
     <Box
       display="flex"
@@ -80,12 +83,20 @@ const Home = () => {
           <>
             <CardsHome>
               <Text>Turnos</Text>
+              <Divider />
+              <Text>{
+                turnosPendientesAConfirmar === undefined ? "No hay turnos pendientes" : turnosPendientesAConfirmar.length === 0 ? "No hay turnos pendientes" : turnosPendientesAConfirmar.length === 1 ? "Hay un turno pendiente" : `Hay ${turnosPendientesAConfirmar.length} turnos pendientes`
+              }</Text>
             </CardsHome>
             <CardsHome>
               <Text>Reintegros</Text>
+              <Divider />
+              <Text>No hay reintegros pendientes</Text>
             </CardsHome>
             <CardsHome>
               <Text>Autorizaciones</Text>
+              <Divider />
+              <Text>No hay autorizaciones pendientes</Text>
             </CardsHome>
           </>
         )}

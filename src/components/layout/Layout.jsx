@@ -1,10 +1,5 @@
 import Navbar from "../navbar/Navbar";
-import {
-  Grid,
-  GridItem,
-  Button,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Grid, GridItem, Button, useDisclosure } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
 import SideNav from "../navbar/SideNav";
@@ -25,17 +20,17 @@ const Layout = ({ children }) => {
         gridTemplateColumns={isOpen ? "200px 1fr" : "50px 1fr"}
         h="100vh"
       >
-        {user?.dni && token && (
+        {user.dni && token && (
           <GridItem bg="#FF686B" area={"nav"}>
             <Button w="100%" borderRadius={0} bg="white" onClick={onToggle}>
               {isOpen ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </Button>
-            {
-              isOpen &&
-              <SideNav />}
+            {isOpen && <SideNav />}
           </GridItem>
         )}
-        <GridItem area={"main"} bg="#F6F6F6" >{children}</GridItem>
+        <GridItem area={"main"} bg="#F6F6F6">
+          {children}
+        </GridItem>
       </Grid>
     </>
   );

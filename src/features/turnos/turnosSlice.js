@@ -22,7 +22,8 @@ const turnosSlice = createSlice({
         (turno) =>
           turno.estado === "Cancelado" ||
           (turno.fechayhora < new Date().toISOString() &&
-            turno.estado == "Confirmado" || turno.estado == "Pendiente a confirmar" )
+            (turno.estado == "Confirmado") |
+              (turno.estado == "Pendiente a confirmar"))
       );
       state.turnosCancelados = state.turnosCancelados.map((turno) => {
         turno.estado = "Cancelado";
@@ -55,10 +56,11 @@ const turnosSlice = createSlice({
       state.turnos = state.turnos.filter(
         (turno) => turno._id !== turnoAEliminar._id
       );
-    }
+    },
   },
 });
 
-export const { setTurnos, confirmarTurno, logoutT, eliminarTurno } = turnosSlice.actions;
+export const { setTurnos, confirmarTurno, logoutT, eliminarTurno } =
+  turnosSlice.actions;
 
 export default turnosSlice.reducer;

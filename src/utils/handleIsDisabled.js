@@ -1,7 +1,15 @@
-import { dateFormatter } from "./dateFormatter";
 
 export const isDisabled = (fechayhora, estado) => {
-    if(fechayhora < dateFormatter(new Date()) || estado === "Confirmado" || estado === "Cancelado"){
-        return true
+    if (estado === "Cancelado") {
+        return true;
+    } else if (estado === "Confirmado") {
+        return true;
+    } else if (estado === "Pendiente a confirmar") {
+        return false;
+    } else if (fechayhora < new Date().toISOString()) {
+        return true;
+    } else {
+        return false;
     }
+        
 };

@@ -17,7 +17,7 @@ import { handleError } from "../../utils/handleError";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { isDisabled } from "../../utils/handleIsDisabled";
-import { eliminarTurno } from "../../features/turnos/turnosSlice";
+import { confirmarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
@@ -29,12 +29,15 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
   const { mutate, isLoading, isSuccess, error } = useMutation({
     mutationKey: ["confirmarTurno"],
     mutationFn: () => {
-      axios
-        .put(`${API_URL}/turnos/${_id}`,{}, {
+      axios.put(
+        `${API_URL}/turnos/${_id}`,
+        {},
+        {
           headers: {
-            "x-token":  token,
+            "x-token": token,
           },
-        })
+        }
+      );
     },
   });
 
@@ -45,7 +48,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
         onSuccess: () => {
           onClose();
           navigate("/");
-          dispatch(eliminarTurno(_id));
+          dispatch(confirmarTurno(_id));
         },
         onError: (error) => {
           console.log(error);
@@ -55,10 +58,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
   };
   return (
     <>
-      <Button
-        isDisabled={isDisabled(fechayhora, estado)}
-        onClick={onOpen}
-      >
+      <Button isDisabled={isDisabled(fechayhora, estado)} onClick={onOpen}>
         {accion}
       </Button>
 
