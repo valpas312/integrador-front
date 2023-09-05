@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Divider } from '@chakra-ui/react'
 
 // eslint-disable-next-line react/prop-types
 const CardsHome = ({children}) => {
@@ -16,6 +16,7 @@ const CardsHome = ({children}) => {
       p={2}
     >
       {children}
+      <Divider my={1} />
     </Box>
   )
 }
