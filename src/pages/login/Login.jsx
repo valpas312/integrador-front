@@ -72,6 +72,7 @@ const Login = () => {
       as="form"
       onSubmit={handleOnSubmit}
       maxW="lg"
+      minW="md"
       mx="auto"
       my="8"
       p="8"
