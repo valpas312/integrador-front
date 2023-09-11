@@ -14,7 +14,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const token = useSelector((state) => state.token.value);
-  const { mutate, isLoading, error, isError } = useMutation({
+  const { mutate, isLoading, error, isError, isSuccess } = useMutation({
     mutationKey: ["turnos"],
     mutationFn: () => {
       axios
@@ -37,7 +37,9 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const turnosPendientesAConfirmar = useSelector((state) => state.turnos.value);
+  const turnosPendientesAConfirmar = useSelector(
+    (state) => state.turnos.turnosPendientesAConfirmar
+  );
 
   return (
     <Box
@@ -80,25 +82,33 @@ const Home = () => {
         ) : isError ? (
           handleError(error)
         ) : (
-          <>
-            <CardsHome>
-              <Text>Turnos</Text>
-              <Divider />
-              <Text>{
-                turnosPendientesAConfirmar === undefined ? "No hay turnos pendientes" : turnosPendientesAConfirmar.length === 0 ? "No hay turnos pendientes" : turnosPendientesAConfirmar.length === 1 ? "Hay un turno pendiente" : `Hay ${turnosPendientesAConfirmar.length} turnos pendientes`
-              }</Text>
-            </CardsHome>
-            <CardsHome>
-              <Text>Reintegros</Text>
-              <Divider />
-              <Text>No hay reintegros pendientes</Text>
-            </CardsHome>
-            <CardsHome>
-              <Text>Autorizaciones</Text>
-              <Divider />
-              <Text>No hay autorizaciones pendientes</Text>
-            </CardsHome>
-          </>
+          isSuccess && (
+            <>
+              <CardsHome>
+                <Text>Turnos</Text>
+                <Divider />
+                <Text>
+                  {turnosPendientesAConfirmar === undefined
+                    ? "No hay turnos pendientes a confirmar"
+                    : Object.keys(turnosPendientesAConfirmar).length === 0
+                    ? "No hay turnos pendientes a confirmar"
+                    : Object.keys(turnosPendientesAConfirmar).length === 1
+                    ? "Hay un turno pendiente a confirmar"
+                    : `Hay ${turnosPendientesAConfirmar.length} turnos pendientes a confirmar`}
+                </Text>
+              </CardsHome>
+              <CardsHome>
+                <Text>Reintegros</Text>
+                <Divider />
+                <Text>No hay reintegros pendientes</Text>
+              </CardsHome>
+              <CardsHome>
+                <Text>Autorizaciones</Text>
+                <Divider />
+                <Text>No hay autorizaciones pendientes</Text>
+              </CardsHome>
+            </>
+          )
         )}
       </Box>
     </Box>
