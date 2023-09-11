@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "../../utils/constantes";
 import axios from "axios";
 import {
-  FormControl,
   FormLabel,
   Input,
   Button,
@@ -14,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
+import Form from "../../components/formControl/Form";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -77,17 +77,7 @@ const Register = () => {
   };
 
   return (
-    <FormControl
-      as="form"
-      onSubmit={handleOnSubmit}
-      maxW="lg"
-      mx="auto"
-      my="8"
-      p="8"
-      bg="white"
-      borderRadius="md"
-      boxShadow="md"
-    >
+    <Form handleOnSubmit={handleOnSubmit}>
       <FormLabel>DNI</FormLabel>
       <Input placeholder="DNI" id="dni" onChange={handleOnChange} isRequired />
 
@@ -148,7 +138,7 @@ const Register = () => {
           Iniciar sesión
         </Button>
       </Center>
-    </FormControl>
+    </Form>
   );
 };
 

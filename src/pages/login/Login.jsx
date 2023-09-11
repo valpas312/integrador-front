@@ -1,5 +1,4 @@
 import {
-  FormControl,
   FormLabel,
   Input,
   Button,
@@ -19,6 +18,7 @@ import { setToken } from "../../features/token/tokenSlice";
 import { setUser } from "../../features/user/userSlice";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
+import Form from "../../components/formControl/Form";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -68,18 +68,7 @@ const Login = () => {
   };
 
   return (
-    <FormControl
-      as="form"
-      onSubmit={handleOnSubmit}
-      maxW="lg"
-      minW="md"
-      mx="auto"
-      my="8"
-      p="8"
-      bg="white"
-      borderRadius="md"
-      boxShadow="md"
-    >
+    <Form handleOnSubmit={handleOnSubmit}>
       <FormLabel>Correo electrónico</FormLabel>
       <Input
         placeholder="Correo electrónico"
@@ -142,7 +131,7 @@ const Login = () => {
           Registrarse
         </Button>
       </Center>
-    </FormControl>
+    </Form>
   );
 };
 

@@ -1,5 +1,4 @@
 import {
-  FormControl,
   FormLabel,
   Input,
   Button,
@@ -18,6 +17,7 @@ import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setVerified } from "../../features/user/userSlice";
+import Form from "../../components/formControl/Form";
 
 const VerificarUsuario = () => {
   const navigate = useNavigate();
@@ -57,17 +57,7 @@ const VerificarUsuario = () => {
     );
   };
   return (
-    <FormControl
-      as="form"
-      onSubmit={handleOnSubmit}
-      maxW="lg"
-      mx="auto"
-      my="8"
-      p="8"
-      bg="white"
-      borderRadius="md"
-      boxShadow="md"
-    >
+    <Form onSubmit={handleOnSubmit} title="Verificar usuario">
       <FormLabel>Correo electrónico</FormLabel>
       <Input
         placeholder="Correo electrónico"
@@ -126,7 +116,7 @@ const VerificarUsuario = () => {
           Registrarse
         </Button>
       </Center>
-    </FormControl>
+    </Form>
   );
 };
 

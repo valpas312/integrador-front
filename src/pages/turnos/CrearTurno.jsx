@@ -1,6 +1,5 @@
 import {
   Button,
-  FormControl,
   FormLabel,
   Input,
   Divider,
@@ -15,6 +14,7 @@ import { API_URL, medicos, especialidades } from "../../utils/constantes";
 import { useSelector } from "react-redux";
 import { handleError } from "../../utils/handleError";
 import { useNavigate } from "react-router-dom";
+import Form from "../../components/formControl/Form";
 
 const CrearTurno = () => {
   const navigate = useNavigate();
@@ -79,17 +79,7 @@ const CrearTurno = () => {
 
   return (
     <>
-      <FormControl
-        as="form"
-        onSubmit={handleOnSubmit}
-        maxW="lg"
-        mx="auto"
-        my="8"
-        p="8"
-        bg="white"
-        borderRadius="md"
-        boxShadow="md"
-      >
+      <Form handleOnSubmit={handleOnSubmit}>
         <FormLabel>Fecha y Hora</FormLabel>
         <Input
           type="datetime-local"
@@ -135,7 +125,7 @@ const CrearTurno = () => {
             "Crear Turno"
           )}
         </Button>
-      </FormControl>
+      </Form>
     </>
   );
 };
