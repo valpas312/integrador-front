@@ -81,9 +81,6 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
                 accion
               )}
             </Button>
-            <Button variant="outline" onClick={onclose}>
-              Cerrar
-            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
