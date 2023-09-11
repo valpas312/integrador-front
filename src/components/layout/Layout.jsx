@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
         templateAreas={`"${user?.dni ? "nav" : ""} main"`}
         gridTemplateRows={user?.dni ? "1fr" : ""}
         gridTemplateColumns={
-          user.dni ? (user.dni && isOpen ? "200px 1fr" : "50px 1fr") : ""
+          user?.dni ? (user.dni && isOpen ? "200px 1fr" : "50px 1fr") : ""
         }
         h="100vh"
       >
