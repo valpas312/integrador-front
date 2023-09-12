@@ -9,6 +9,7 @@ import {
   Image,
   Text,
   Box,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +18,7 @@ import { logout } from "../../features/user/userSlice";
 import { logoutT } from "../../features/turnos/turnosSlice";
 
 const Navbar = () => {
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.value);
@@ -40,7 +42,7 @@ const Navbar = () => {
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Star_of_life.svg/225px-Star_of_life.svg.png"
               maxW="50px"
             />
-            <Text fontSize="2xl">Medicina Privada</Text>
+            {isLargerThan768 && <Text fontSize="2xl">Medicina Privada</Text>}
           </Container>
           <Link to="/">Home</Link>
           <Menu>
@@ -50,7 +52,7 @@ const Navbar = () => {
               _hover={{ bg: "#e25f61" }}
               rightIcon={<ChevronDownIcon />}
             >
-              <Avatar bg="teal.500" size="xs" />
+              {isLargerThan768 && <Avatar bg="teal.500" size="xs" />}
             </MenuButton>
             <MenuList color="black" boxShadow="lg">
               <MenuItem

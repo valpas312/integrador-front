@@ -1,35 +1,12 @@
-import { useSelector } from "react-redux";
-import TurnosButton from "./TurnosButton";
 import { ButtonGroup } from "@chakra-ui/react";
-import { useState } from "react";
 import CardTurno from "../../pages/turnos/CardTurno";
 import { dateFormatter } from "../../utils/dateFormatter";
 import { Box } from "@chakra-ui/react";
+import Filtros from "./Filtros";
+import { useSelector } from "react-redux";
 
 const Buttons = () => {
-  const turnos = useSelector((state) => state.turnos.turnos);
-
-  const [turnosAMostrar, setTurnosAMostrar] = useState(turnos);
-
-  //Estados de redux
-  const turnosPendientesAConfirmar = useSelector(
-    (state) => state.turnos.turnosPendientesAConfirmar
-  );
-  const turnosConfirmados = useSelector(
-    (state) => state.turnos.turnosConfirmados
-  );
-  const turnosCancelados = useSelector(
-    (state) => state.turnos.turnosCancelados
-  );
-  const historialDeTurnos = useSelector(
-    (state) => state.turnos.historialDeTurnos
-  );
-
-  const handleTurnosAMostrar = (turnos) => {
-    setTurnosAMostrar(turnos);
-    console.log(turnos);
-  };
-
+  const turnosAMostrar = useSelector((state) => state.turnos.turnosAMostrar);
   return (
     <>
       <ButtonGroup
@@ -41,23 +18,7 @@ const Buttons = () => {
         alignItems="center"
         gap={4}
       >
-        <TurnosButton onClick={() => handleTurnosAMostrar(turnos)}>
-          Todos los turnos
-        </TurnosButton>
-        <TurnosButton onClick={() => handleTurnosAMostrar(historialDeTurnos)}>
-          Historial de turnos
-        </TurnosButton>
-        <TurnosButton
-          onClick={() => handleTurnosAMostrar(turnosPendientesAConfirmar)}
-        >
-          Turnos pendientes a confirmar
-        </TurnosButton>
-        <TurnosButton onClick={() => handleTurnosAMostrar(turnosConfirmados)}>
-          Turnos confirmados
-        </TurnosButton>
-        <TurnosButton onClick={() => handleTurnosAMostrar(turnosCancelados)}>
-          Turnos cancelados
-        </TurnosButton>
+        <Filtros />
       </ButtonGroup>
       <Box
         display="flex"
@@ -68,7 +29,7 @@ const Buttons = () => {
         padding="2rem"
       >
         {(turnosAMostrar == null) | undefined ? (
-          <h1>No hay turnos para esta seleccion</h1>
+          <h1>Seleccione una opcion</h1>
         ) : Object.keys(turnosAMostrar).length === 0 ? (
           <h1>No hay turnos para esta seleccion</h1>
         ) : (
