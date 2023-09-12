@@ -17,8 +17,7 @@ const turnosSlice = createSlice({
       state.turnosAMostrar = action.payload;
       state.historialDeTurnos = action.payload.filter(
         (turno) =>
-          turno.fechayhora < new Date().toISOString() ||
-          turno.estado == "Confirmado"
+          turno.fechayhora < new Date().toISOString()
       );
       state.turnosCancelados = action.payload.filter(
         (turno) =>
@@ -59,7 +58,7 @@ const turnosSlice = createSlice({
         (turno) => turno._id !== turnoAEliminar._id
       );
     },
-    turnosAMostrar(state, action) {
+    setTurnosAMostrar(state, action) {
       state.turnosAMostrar = action.payload;
     },
   },
@@ -70,7 +69,7 @@ export const {
   confirmarTurno,
   logoutT,
   eliminarTurno,
-  turnosAMostrar,
+  setTurnosAMostrar,
 } = turnosSlice.actions;
 
 export default turnosSlice.reducer;

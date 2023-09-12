@@ -5,6 +5,7 @@ import {
   CardFooter,
   Text,
   Divider,
+  useMediaQuery
 } from "@chakra-ui/react";
 import TurnosModal from "./TurnosModal";
 import InfoModal from "./InfoModal";
@@ -13,11 +14,12 @@ import InfoModal from "./InfoModal";
 
 // eslint-disable-next-line no-unused-vars
 const CardTurno = ({ ...props }) => {
+  const [isLatgerThan768] = useMediaQuery("(min-width: 768px)");
   // eslint-disable-next-line react/prop-types
   const { especialidad, fechayhora, medico, estado, key, accion, descripcion, _id } = props;
 
   return (
-    <Card key={key} w="20vw">
+    <Card key={key} w={isLatgerThan768 ? "30vw" : "60vw" }>
       <CardHeader
         display="flex"
         justifyContent="space-between"
@@ -31,7 +33,7 @@ const CardTurno = ({ ...props }) => {
         <Text>{fechayhora}</Text>
       </CardBody>
       <Divider />
-      <CardFooter bg="#FF686B" display="flex" justifyContent="space-between" alignItems="center" >
+      <CardFooter bg="#FF686B"display="flex" gap="1em" justifyContent="space-between" alignItems="center" flexDirection={"column"} >
         <Text fontWeight="bold">{estado}</Text>
         <TurnosModal
           fechayhora={fechayhora}

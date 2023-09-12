@@ -8,10 +8,10 @@ import {
   MenuItem,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { setTurnosAMostrar } from "../../features/turnos/turnosSlice"
 
 const Filtros = () => {
   const turnos = useSelector((state) => state.turnos.turnos);
-  const turnosAMostrar = useSelector((state) => state.turnos.turnosAMostrar);
   const [isLargerThan1220] = useMediaQuery("(min-width: 1220px)");
 
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ const Filtros = () => {
   );
 
   const handleTurnosAMostrar = (turnos) => {
-    dispatch(turnosAMostrar(turnos));
+    dispatch(setTurnosAMostrar(turnos));
     console.log(turnos);
   };
   return (
