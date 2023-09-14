@@ -9,6 +9,7 @@ import {
   useDisclosure,
   Button,
   Spinner,
+  useToast
 } from "@chakra-ui/react";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useMutation } from "@tanstack/react-query";
@@ -21,6 +22,7 @@ import { eliminarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const InfoModal = ({ _id }) => {
+  const toast = useToast();
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const token = useSelector((state) => state.token.value);
@@ -45,6 +47,13 @@ const InfoModal = ({ _id }) => {
       {
         onSuccess: () => {
           onClose();
+          toast({
+            title: "Turno eliminado",
+            description: "Turno eliminado correctamente",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           navigate("/");
           dispatch(eliminarTurno(_id));
         },

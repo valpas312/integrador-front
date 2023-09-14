@@ -5,6 +5,7 @@ import {
   Divider,
   Spinner,
   Select,
+  useToast,
 } from "@chakra-ui/react";
 
 import { useState } from "react";
@@ -18,6 +19,8 @@ import Form from "../../components/formControl/Form";
 
 const CrearTurno = () => {
   const navigate = useNavigate();
+
+  const toast = useToast();
 
   //token del usuario
   const token = useSelector((state) => state.token.value);
@@ -67,7 +70,14 @@ const CrearTurno = () => {
       {},
       {
         onSuccess: (data) => {
-          console.log(data.data)
+          console.log(data.data);
+          toast({
+            title: "Turno creado",
+            description: "Turno creado correctamente",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
           navigate("/");
         },
         onError: (error) => {
@@ -89,21 +99,31 @@ const CrearTurno = () => {
         />
 
         <FormLabel>Medico</FormLabel>
-        <Select placeholder="Select option" id="medico" onChange={handleOnChange} isRequired>
-            {medicos.map((medico) => (
-                <option key={medico} value={medico}>
-                    {medico}
-                </option>
-            ))}
+        <Select
+          placeholder="Select option"
+          id="medico"
+          onChange={handleOnChange}
+          isRequired
+        >
+          {medicos.map((medico) => (
+            <option key={medico} value={medico}>
+              {medico}
+            </option>
+          ))}
         </Select>
 
         <FormLabel>Especialidad</FormLabel>
-        <Select placeholder="Select option" id="especialidad" onChange={handleOnChange} isRequired>
-            {especialidades.map((especialidad) => (
-                <option key={especialidad} value={especialidad}>
-                    {especialidad}
-                </option>
-            ))}
+        <Select
+          placeholder="Select option"
+          id="especialidad"
+          onChange={handleOnChange}
+          isRequired
+        >
+          {especialidades.map((especialidad) => (
+            <option key={especialidad} value={especialidad}>
+              {especialidad}
+            </option>
+          ))}
         </Select>
 
         <Divider my="4" />

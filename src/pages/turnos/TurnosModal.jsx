@@ -9,6 +9,7 @@ import {
   useDisclosure,
   Button,
   Spinner,
+  useToast
 } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -21,6 +22,7 @@ import { confirmarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
+  const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token.value);
@@ -47,6 +49,13 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
       {
         onSuccess: () => {
           onClose();
+          toast({
+            title: "Turno confirmado",
+            description: "Turno confirmado correctamente",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           navigate("/");
           dispatch(confirmarTurno(_id));
         },

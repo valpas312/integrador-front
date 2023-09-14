@@ -8,6 +8,7 @@ import {
   HStack,
   PinInput,
   PinInputField,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { API_URL } from "../../utils/constantes";
@@ -20,8 +21,9 @@ import { setVerified } from "../../features/user/userSlice";
 import Form from "../../components/formControl/Form";
 
 const VerificarUsuario = () => {
+  const toast = useToast();
   const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
@@ -35,7 +37,7 @@ const VerificarUsuario = () => {
     mutationFn: () => {
       return axios.post(`${API_URL}/users/verify`, {
         email,
-        code
+        code,
       });
     },
   });
@@ -49,6 +51,13 @@ const VerificarUsuario = () => {
           console.log(data.data);
           navigate("/");
           dispatch(setVerified());
+          toast({
+            title: "Usuario verificado",
+            description: "Usuario verificado correctamente",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
         },
         onError: (error) => {
           console.log(error);
@@ -68,8 +77,14 @@ const VerificarUsuario = () => {
 
       <FormLabel>Codigo</FormLabel>
       <HStack>
-        <PinInput type="alphanumeric" mask id="code" onChange={(e) => setCode(e)} isRequired >
-          <PinInputField  />
+        <PinInput
+          type="alphanumeric"
+          mask
+          id="code"
+          onChange={(e) => setCode(e)}
+          isRequired
+        >
+          <PinInputField />
           <PinInputField />
           <PinInputField />
           <PinInputField />

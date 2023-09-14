@@ -7,6 +7,7 @@ import {
   InputGroup,
   InputRightElement,
   Center,
+  useToast
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import axios from "axios";
@@ -22,6 +23,7 @@ import Form from "../../components/formControl/Form";
 
 const Login = () => {
   const navigate = useNavigate();
+  const toast = useToast();
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -56,6 +58,13 @@ const Login = () => {
       {
         onSuccess: (data) => {
           console.log(data.data);
+          toast({
+            title: "Sesion iniciada",
+            description: "Sesion iniciada correctamente",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
           dispatch(setToken(data.data.token));
           dispatch(setUser(data.data.usuario));
           navigate("/");
