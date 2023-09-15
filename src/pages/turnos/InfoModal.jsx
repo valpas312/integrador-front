@@ -22,15 +22,14 @@ import { eliminarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const InfoModal = ({ _id }) => {
+  //Estados y constantes
   const toast = useToast();
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const token = useSelector((state) => state.token.value);
-
   const navigate = useNavigate();
 
-  console.log(_id);
-
+  //Funciones para eliminar el turno
   const { mutate, isLoading, error } = useMutation({
     mutationKey: ["turno"],
     mutationFn: () =>
@@ -63,7 +62,6 @@ const InfoModal = ({ _id }) => {
       }
     );
   };
-
   return (
     <>
       <Button colorScheme="red" onClick={onOpen}>

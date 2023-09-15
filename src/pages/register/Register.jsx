@@ -18,7 +18,7 @@ import Form from "../../components/formControl/Form";
 const Register = () => {
   const navigate = useNavigate();
   const toast = useToast();
-
+  
   //estados para el formulario
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
@@ -112,7 +112,7 @@ const Register = () => {
           type="submit"
           colorScheme="teal"
           size="lg"
-          fontSize="md"
+          fontSize="sm"
           isLoading={isLoading}
         >
           {isLoading ? (
@@ -132,7 +132,7 @@ const Register = () => {
         <Button
           colorScheme="blue"
           size="lg"
-          fontSize="md"
+          fontSize="sm"
           onClick={() => navigate("/login")}
         >
           Iniciar sesión

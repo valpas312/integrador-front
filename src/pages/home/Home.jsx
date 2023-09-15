@@ -50,8 +50,8 @@ const Home = () => {
       gap={5}
       flexWrap="wrap"
     >
-      <Text fontSize="2xl" color="gray.600" fontWeight="bold" m={4}>
-        Integrante:{user.nombre}
+      <Text fontSize="2xl" fontWeight="bold" m={4}>
+        Integrante: {user.nombre}
       </Text>
       <Box
         display="flex"

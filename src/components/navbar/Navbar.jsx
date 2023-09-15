@@ -37,14 +37,14 @@ const Navbar = () => {
     >
       {user?.dni && token ? (
         <Box display="flex" alignItems="center" maxW="100vw" gap={5}>
-          <Container display="flex" maxW="100%">
+          <Container display="flex" alignItems="center" maxW="100%">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Star_of_life.svg/225px-Star_of_life.svg.png"
               maxW="50px"
             />
-            {isLargerThan768 && <Text fontSize="2xl">Medicina Privada</Text>}
+            {isLargerThan768 && <Text fontSize="md">Medicina Privada</Text>}
           </Container>
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
           <Menu>
             <MenuButton
               as={Button}

@@ -22,12 +22,14 @@ import { confirmarTurno } from "../../features/turnos/turnosSlice";
 
 // eslint-disable-next-line react/prop-types
 const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
+  //Estados y constantes
   const toast = useToast();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token.value);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  //Funciones para verificar el turno
   const { mutate, isLoading, isSuccess, error } = useMutation({
     mutationKey: ["confirmarTurno"],
     mutationFn: () => {

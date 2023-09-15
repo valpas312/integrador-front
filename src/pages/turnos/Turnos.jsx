@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const Turnos = () => {
   const user = useSelector((state) => state.user.value);
-
   return (
     <>
       {user.verified === true ? (

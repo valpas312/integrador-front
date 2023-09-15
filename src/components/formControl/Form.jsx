@@ -1,3 +1,4 @@
+//Componente Form estilado y funcional para uso en formularios
 import { FormControl, useMediaQuery } from "@chakra-ui/react"
 
 // eslint-disable-next-line react/prop-types

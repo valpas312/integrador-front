@@ -12,6 +12,7 @@ const turnosSlice = createSlice({
   name: "turnos",
   initialState,
   reducers: {
+    //Setea todos los turnos en el estado de turnos y los separa en los estados correspondientes
     setTurnos(state, action) {
       state.turnos = action.payload;
       state.turnosAMostrar = action.payload;

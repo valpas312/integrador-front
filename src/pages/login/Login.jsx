@@ -22,17 +22,16 @@ import { useNavigate } from "react-router-dom";
 import Form from "../../components/formControl/Form";
 
 const Login = () => {
+  //Estados y constantes
   const navigate = useNavigate();
   const toast = useToast();
-
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState("");
   const [contraseña, setContraseña] = useState("");
 
+  //Funciones para el login
   const handleOnChange = (e) => {
     if (e.target.id === "email") {
       setEmail(e.target.value);
@@ -109,7 +108,7 @@ const Login = () => {
           type="submit"
           colorScheme="teal"
           size="lg"
-          fontSize="md"
+          fontSize="sm"
           isLoading={isLoading}
         >
           {isLoading ? (
@@ -134,7 +133,7 @@ const Login = () => {
         <Button
           colorScheme="blue"
           size="lg"
-          fontSize="md"
+          fontSize="sm"
           onClick={() => navigate("/register")}
         >
           Registrarse

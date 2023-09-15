@@ -21,13 +21,14 @@ import { setVerified } from "../../features/user/userSlice";
 import Form from "../../components/formControl/Form";
 
 const VerificarUsuario = () => {
+  //Estados y constantes
   const toast = useToast();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
 
+  //Funciones
   const handleOnChange = (e) => {
     setEmail(e.target.value);
   };
