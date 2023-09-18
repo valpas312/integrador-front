@@ -87,7 +87,7 @@ const Home = () => {
         ) : (
           isSuccess && (
             <>
-              <CardsHome w="90%">
+              <CardsHome w={isLargerThan600 ? "90%" : "100%" }>
                 <Text>Turnos</Text>
                 <Divider />
                 <Text>
