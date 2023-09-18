@@ -18,10 +18,12 @@ import { logout } from "../../features/user/userSlice";
 import { logoutT } from "../../features/turnos/turnosSlice";
 
 const Navbar = () => {
+  //Media queries
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
-  const dispatch = useDispatch();
 
+  //Redux
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const token = useSelector((state) => state.token.value);
 
@@ -36,6 +38,7 @@ const Navbar = () => {
       position="sticky"
       top="0"
     >
+    {/* //Si hay un usuario logueado y hay un token, se muestra toda la navbar, sino solo muestra los botones de login y register */}
       {user?.dni && token ? (
         <Box display="flex" alignItems="center" maxW="100vw" gap={5}>
           <Container display="flex" alignItems="center" maxW="100%">
@@ -43,6 +46,7 @@ const Navbar = () => {
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Star_of_life.svg/225px-Star_of_life.svg.png"
               maxW="50px"
             />
+            {/* Si la pantalla es de mas de 768px de ancho se muestra el logo */}
             {isLargerThan768 && <Text fontSize="md">Medicina Privada</Text>}
           </Container>
           <Link to="/">Inicio</Link>
@@ -55,6 +59,7 @@ const Navbar = () => {
               </>
             )
           }
+          {/* Botones del usuario */}
           <Menu>
             <MenuButton
               as={Button}

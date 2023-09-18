@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
     <>
       <Navbar />
       {
-        //Si hay un usuario logueado y la pantalla es mayor a 500px, se muestra el sidenav
+        //Si hay un usuario logueado y la pantalla es mayor a 500px, se muestra el sidenav, sino solo muestra el children
         isLargerThan500 ? (
       <Grid
         //Si hay un usuario logueado, el sidenav ocupa el 20% del ancho de la pantalla

@@ -1,3 +1,4 @@
+//Sidenav para la seccion de turnos
 import { Box } from "@chakra-ui/layout"
 import SideNavLink from "./SideNavLink"
 
