@@ -1,4 +1,4 @@
-import { Box, Divider, Spinner, Text } from "@chakra-ui/react";
+import { Box, Divider, Spinner, Text, useMediaQuery } from "@chakra-ui/react";
 import CredencialDigital from "./CredencialDigital";
 import CardsHome from "./CardsHome";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ import axios from "axios";
 import { handleError } from "../../utils/handleError";
 
 const Home = () => {
+  const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const token = useSelector((state) => state.token.value);
@@ -53,27 +54,29 @@ const Home = () => {
       <Text fontSize="2xl" fontWeight="bold" m={4}>
         Integrante: {user.nombre}
       </Text>
+      {isLargerThan600 && (
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          gap={2}
+          w="90%"
+          boxShadow="base"
+          rounded="md"
+          bg="#FFFFFF"
+          p={2}
+        >
+          Credencial Digital
+          <Divider />
+          <CredencialDigital nombre={user.nombre} dni={user.dni} />
+        </Box>
+      )}
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
-        flexDirection="column"
-        gap={2}
-        w="90%"
-        boxShadow="base"
-        rounded="md"
-        bg="#FFFFFF"
-        p={2}
-      >
-        Credencial Digital
-        <Divider />
-        <CredencialDigital nombre={user.nombre} dni={user.dni} />
-      </Box>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        gap={2}
+        gap={3}
         w="100%"
         flexWrap="wrap"
       >
@@ -84,7 +87,7 @@ const Home = () => {
         ) : (
           isSuccess && (
             <>
-              <CardsHome>
+              <CardsHome w="90%">
                 <Text>Turnos</Text>
                 <Divider />
                 <Text>
@@ -97,12 +100,12 @@ const Home = () => {
                     : `Hay ${turnosPendientesAConfirmar.length} turnos pendientes a confirmar`}
                 </Text>
               </CardsHome>
-              <CardsHome>
+              <CardsHome w={isLargerThan600 ? "45%" : "100%"}>
                 <Text>Reintegros</Text>
                 <Divider />
                 <Text>No hay reintegros pendientes</Text>
               </CardsHome>
-              <CardsHome>
+              <CardsHome w={isLargerThan600 ? "45%" : "100%"}>
                 <Text>Autorizaciones</Text>
                 <Divider />
                 <Text>No hay autorizaciones pendientes</Text>

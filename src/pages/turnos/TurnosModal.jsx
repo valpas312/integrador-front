@@ -50,7 +50,6 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
       {},
       {
         onSuccess: () => {
-          onClose();
           toast({
             title: "Turno confirmado",
             description: "Turno confirmado correctamente",
@@ -60,6 +59,7 @@ const TurnosModal = ({ accion, descripcion, fechayhora, _id, estado }) => {
           });
           navigate("/");
           dispatch(confirmarTurno(_id));
+          onClose();
         },
         onError: (error) => {
           console.log(error);

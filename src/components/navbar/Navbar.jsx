@@ -19,6 +19,7 @@ import { logoutT } from "../../features/turnos/turnosSlice";
 
 const Navbar = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user.value);
@@ -45,6 +46,15 @@ const Navbar = () => {
             {isLargerThan768 && <Text fontSize="md">Medicina Privada</Text>}
           </Container>
           <Link to="/">Inicio</Link>
+          {
+            //Si hay un usuario logueado y la pantalla es mayor a 500px, se muestra el sidenav
+            !isLargerThan500 && (
+              <>
+                <Link to="/turnos">Turnos</Link>
+                <Link to="turnos/crear">Sacar turno</Link>
+              </>
+            )
+          }
           <Menu>
             <MenuButton
               as={Button}

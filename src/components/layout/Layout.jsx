@@ -1,18 +1,21 @@
 import Navbar from "../navbar/Navbar";
-import { Grid, GridItem, Button, useDisclosure } from "@chakra-ui/react";
+import { Grid, GridItem, Button, useDisclosure, useMediaQuery } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
 import SideNav from "../navbar/SideNav";
 
 // eslint-disable-next-line react/prop-types
 const Layout = ({ children }) => {
+  const [isLargerThan500] = useMediaQuery("(min-width: 500px)");
   const user = useSelector((state) => state.user.value);
-
   const { isOpen, onToggle } = useDisclosure();
 
   return (
     <>
       <Navbar />
+      {
+        //Si hay un usuario logueado y la pantalla es mayor a 500px, se muestra el sidenav
+        isLargerThan500 ? (
       <Grid
         //Si hay un usuario logueado, el sidenav ocupa el 20% del ancho de la pantalla
         templateAreas={`"${user?.dni ? "nav" : ""} main"`}
@@ -35,6 +38,12 @@ const Layout = ({ children }) => {
           {children}
         </GridItem>
       </Grid>
+        ) : (
+          <GridItem area={"main"} bg="#F6F6F6">
+          {children}
+        </GridItem>
+        )
+      }
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 
 // eslint-disable-next-line react/prop-types
-const CardsHome = ({children}) => {
+const CardsHome = ({children, w}) => {
   return (
     <Box
       display="flex"
@@ -9,7 +9,7 @@ const CardsHome = ({children}) => {
       alignItems="center"
       flexDirection="column"
       gap={2}
-      w="45%"
+      w={w}
       boxShadow="base"
       rounded="md"
       bg="#FFFFFF"

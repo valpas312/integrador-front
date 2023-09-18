@@ -19,7 +19,7 @@ const CardTurno = ({ ...props }) => {
   const { especialidad, fechayhora, medico, estado, key, accion, descripcion, _id } = props;
 
   return (
-    <Card key={key} w={isLatgerThan768 ? "30vw" : "60vw" }>
+    <Card key={key} w={isLatgerThan768 ? "30vw" : "70vw" }>
       <CardHeader
         display="flex"
         justifyContent="space-between"
