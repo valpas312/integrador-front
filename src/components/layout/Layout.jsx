@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
         </GridItem>
       </Grid>
         ) : (
-          <GridItem area={"main"} bg="#F6F6F6">
+          <GridItem area={"main"}>
           {children}
         </GridItem>
         )
