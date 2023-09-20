@@ -1,5 +1,5 @@
 import CrearTurnos from "../../components/CrearTurno/CrearTurnos";
-import { useSelector } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 const CrearTurno = () => {
   const user = useSelector((state) => state.user.value);
