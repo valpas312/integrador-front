@@ -43,8 +43,9 @@ const VerificarUsuario = () => {
     },
   });
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log(email, code)
     mutate(
       {},
       {
@@ -67,7 +68,7 @@ const VerificarUsuario = () => {
     );
   };
   return (
-    <Form onSubmit={handleOnSubmit} title="Verificar usuario">
+    <Form handleOnSubmit={handleOnSubmit} title="Verificar usuario">
       <FormLabel>Correo electrónico</FormLabel>
       <Input
         placeholder="Correo electrónico"
@@ -82,7 +83,10 @@ const VerificarUsuario = () => {
           type="alphanumeric"
           mask
           id="code"
-          onChange={(e) => setCode(e)}
+          onChange={(e) => (
+            setCode(e),
+            console.log(e)
+          )}
           isRequired
         >
           <PinInputField />
@@ -117,19 +121,6 @@ const VerificarUsuario = () => {
           ) : (
             "Verificar usuario"
           )}
-        </Button>
-
-        <Center h="50px">
-          <Divider orientation="vertical" my="4" />
-        </Center>
-
-        <Button
-          colorScheme="blue"
-          size="lg"
-          fontSize="md"
-          onClick={() => navigate("/login")}
-        >
-          Registrarse
         </Button>
       </Center>
     </Form>

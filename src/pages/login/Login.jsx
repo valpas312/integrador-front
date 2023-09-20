@@ -50,23 +50,23 @@ const Login = () => {
     },
   });
 
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     mutate(
       {},
       {
         onSuccess: (data) => {
           console.log(data.data);
-          toast({
+          dispatch(setToken(data.data.token));
+          dispatch(setUser(data.data.usuario));
+          navigate("/");
+          isSuccess && toast({
             title: "Sesion iniciada",
             description: "Sesion iniciada correctamente",
             status: "success",
             duration: 5000,
             isClosable: true,
           });
-          dispatch(setToken(data.data.token));
-          dispatch(setUser(data.data.usuario));
-          navigate("/");
         },
         onError: (error) => {
           console.log(error);

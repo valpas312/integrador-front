@@ -52,7 +52,7 @@ const Register = () => {
   });
 
   //funcion para manejar el submit del formulario
-  const handleOnSubmit = async (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     mutate(
       {},
