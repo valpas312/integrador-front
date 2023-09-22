@@ -55,7 +55,7 @@ const Login = () => {
     mutate(
       {},
       {
-        onSuccess: () => {
+        onSuccess: (data) => {
           dispatch(setToken(data.data.token));
           dispatch(setUser(data.data.usuario));
           navigate("/");
