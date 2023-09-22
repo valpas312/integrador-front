@@ -45,12 +45,10 @@ const VerificarUsuario = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(email, code)
     mutate(
       {},
       {
-        onSuccess: (data) => {
-          console.log(data.data);
+        onSuccess: () => {
           navigate("/");
           dispatch(setVerified());
           toast({

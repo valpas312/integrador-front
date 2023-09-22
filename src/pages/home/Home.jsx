@@ -25,7 +25,6 @@ const Home = () => {
           },
         })
         .then((res) => {
-          console.log(res.data.data);
           dispatch(setTurnos(res.data.data));
         })
         .catch((err) => {

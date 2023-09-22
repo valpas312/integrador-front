@@ -57,8 +57,7 @@ const Register = () => {
     mutate(
       {},
       {
-        onSuccess: (data) => {
-          console.log(data.data);
+        onSuccess: () => {
           navigate("/login");
           toast({
             title: "Usuario Registrado.",

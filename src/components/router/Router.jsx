@@ -19,7 +19,7 @@ const Router = () => {
             <Route path="/verificar" element={useElement(<VerificarUsuario/>, <Login/>)} />
             <Route path="/turnos/crear" element={useElement(<CrearTurno/>, <Login/>)} />
             <Route path="/turnos" element={useElement(<Turnos/>, <Login/>)} />
-            <Route path="*" element={<h1>404</h1>} />
+            <Route path="*" element={<h1>Esta pagina no existe o no ha sido encontrada, vuelva al inicio</h1>} />
         </Routes>
         </Layout>
     </BrowserRouter>

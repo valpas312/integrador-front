@@ -55,8 +55,7 @@ const Login = () => {
     mutate(
       {},
       {
-        onSuccess: (data) => {
-          console.log(data.data);
+        onSuccess: () => {
           dispatch(setToken(data.data.token));
           dispatch(setUser(data.data.usuario));
           navigate("/");

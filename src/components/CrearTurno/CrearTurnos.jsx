@@ -60,8 +60,7 @@ const CrearTurnos = () => {
       mutate(
         {},
         {
-          onSuccess: (data) => {
-            console.log(data.data);
+          onSuccess: () => {
             toast({
               title: "Turno creado",
               description: "Turno creado correctamente",
