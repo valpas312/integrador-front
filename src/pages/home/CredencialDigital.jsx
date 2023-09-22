@@ -28,13 +28,6 @@ const CredencialDigital = ({nombre, dni}) => {
                 <Text>Plan: PCG1</Text>
                 <Text>Valido desde: 09/23</Text>
             </Box>
-            <Box
-                display="flex"
-                gap={1}
-            >
-                <Text>Plan: PCG2</Text>
-                <Text>Valido desde: 09/23</Text>
-            </Box>
         </Box>
     </Box>
   )
